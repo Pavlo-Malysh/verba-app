@@ -1,0 +1,67 @@
+.headerContainer {
+    max-width: 1440px;
+    padding: 20px 64px;
+    display: flex;
+}
+
+.logoText {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #121417;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.navBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navItem {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #121417;
+}
+
+.loginBtn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #121417;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.iconLogin {
+    stroke: #f4c550;
+    flex-shrink: 0;
+}
+
+.registerBtn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #fff;
+
+    border-radius: 12px;
+    padding: 14px 39px;
+
+    background-color: #121417;
+}
