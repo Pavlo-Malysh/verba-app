@@ -1,0 +1,104 @@
+.heroBox {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.heroContent {
+    border-radius: 30px;
+    background-color: #f8f8f8;
+    padding: 98px 108px 98px 64px;
+}
+
+.title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 1.16667;
+    letter-spacing: -0.02em;
+    color: #121417;
+    max-width: 548px;
+    margin-bottom: 32px;
+}
+
+.titleAccent {
+    font-style: italic;
+    font-weight: 400;
+    border-radius: 8px;
+    padding: 1px 8px;
+    background-color: #fbe9ba;
+
+}
+
+.text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.375;
+    letter-spacing: -0.02em;
+    color: #121417;
+    max-width: 471px;
+    margin-bottom: 64px;
+}
+
+.link {
+    border-radius: 12px;
+    padding: 16px 88px;
+
+    background-color: #f4c550;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: #121417;
+    display: inline-block;
+}
+
+.heroImgBox {
+    border-radius: 30px;
+    width: 568px;
+    height: 530px;
+    background-color: #8a8a89;
+    overflow: hidden;
+}
+
+.heroAdvantages {
+    border: 1.50px dashed #f4c550;
+    border-radius: 30px;
+    width: 1312px;
+    height: 116px;
+    padding: 40px 123px;
+
+}
+
+.heroList {
+    display: flex;
+    gap: 100px;
+
+}
+
+.heroItem {
+    display: flex;
+    gap: 16px;
+}
+
+.listTitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.14286;
+    letter-spacing: -0.02em;
+    color: #121417;
+
+}
+
+.listText {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    color: rgba(18, 20, 23, 0.7);
+    max-width: 74px;
+}
