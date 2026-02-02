@@ -64,12 +64,11 @@
 }
 
 .heroAdvantages {
-    border: 1.50px dashed #f4c550;
+    border: 1.5px dashed #f4c550;
     border-radius: 30px;
     width: 1312px;
     height: 116px;
     padding: 40px 123px;
-
 }
 
 .heroList {

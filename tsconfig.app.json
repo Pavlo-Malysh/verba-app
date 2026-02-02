@@ -30,6 +30,6 @@
   },
   "include": [
     "src",
-    "src/components/App/App.tsx"
+    "src/App.tsx"
   ]
 }
