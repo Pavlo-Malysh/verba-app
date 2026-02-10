@@ -1,6 +1,6 @@
 
 
-function Favorites() {
+function FavoritesPage() {
 
     return (
         <>
@@ -9,4 +9,4 @@ function Favorites() {
     )
 }
 
-export default Favorites
+export default FavoritesPage

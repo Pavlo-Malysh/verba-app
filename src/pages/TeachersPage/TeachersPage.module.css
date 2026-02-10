@@ -1,0 +1,13 @@
+.btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: #121417;
+    border-radius: 12px;
+    padding: 16px 48px;
+    background-color: #f4c550;
+    border: none;
+    display: block;
+    margin: auto;
+}

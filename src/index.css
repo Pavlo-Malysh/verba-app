@@ -42,9 +42,14 @@ a {
 }
 
 body {
-  font-family: var(--font-manrope), sans-serif;
+  font-family: "Roboto", var(--font-manrope), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #121417;
 
   flex-direction: column;
   min-height: 100vh;

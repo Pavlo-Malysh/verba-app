@@ -1,0 +1,314 @@
+.card {
+    position: relative;
+    background-color: #ffff;
+    margin-bottom: 32px;
+    border-radius: 24px;
+    padding: 24px 24px 24px 192px;
+
+
+}
+
+.title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    color: #121417;
+    flex-shrink: 0;
+    min-width: 200px;
+}
+
+.subtitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #8a8a89;
+    display: block;
+    margin-bottom: 8px;
+}
+
+
+
+.iconBook {
+    stroke: rgb(0, 0, 0);
+    fill: none;
+}
+
+.navTeacherBlock {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+
+    justify-content: space-between;
+    margin-bottom: 32px;
+
+}
+
+.listItemText {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #121417;
+}
+
+.list {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin-right: 90px;
+}
+
+.listItemFirst {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.list li {
+    position: relative;
+}
+
+.list li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 16px;
+    background-color: rgba(18, 20, 23, 0.2);
+    ;
+}
+
+.listItemRating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price {
+    color: #38cd3e;
+}
+
+.iconHeart {
+    fill: none;
+    stroke-width: 2px;
+    stroke: #121417;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.iconHeart:hover,
+.iconHeart:focus {
+    fill: #f4c550;
+    stroke: none;
+}
+
+.avatar {
+
+    border-radius: 50%;
+}
+
+.avatarContainer::after {
+    position: absolute;
+    content: "";
+    width: 12px;
+    height: 12px;
+    top: 19px;
+    right: 18px;
+    background-color: #38cd3e;
+    border-radius: 50%;
+    border: 2px solid #ffff;
+    z-index: 999;
+}
+
+.avatarContainer {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fbe9ba;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+.wrapper {}
+
+.infoText {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #8a8a89;
+}
+
+.listItemInfo {
+    margin-bottom: 8px;
+}
+
+.infoTextLangueges {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #121417;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.infoTextLessons {
+    color: #121417;
+}
+
+.listItemInfo:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 16px;
+}
+
+.listItemInfo:first-child {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.infoTextConditions {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #121417;
+}
+
+.readMoreBtn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #121417;
+    border: none;
+    background-color: transparent;
+}
+
+
+.testtext {
+    height: 0;
+    overflow: hidden;
+}
+
+
+
+.open {
+    height: auto;
+    overflow: auto;
+}
+
+.experienceText {
+    margin-bottom: 32px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #121417;
+}
+
+.reviewsList {
+    margin-bottom: 32px;
+}
+
+.reviewsListItem {
+    margin-bottom: 32px;
+}
+
+.userAvatarDefault {
+    border-radius: 100%;
+    border: 2px solid #8a8a89;
+    fill: #8a8a89;
+}
+
+.reviewerRatingWrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.reviewerTitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #8a8a89;
+    margin-bottom: 2px;
+}
+
+.ratingNumber {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    color: #121417;
+}
+
+.reviewWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.commentText {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #121417;
+}
+
+.listLevels {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.listLevelsItem {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.14286;
+    color: #121417;
+    padding: 8px 12px;
+    border: 1px solid rgba(18, 20, 23, 0.2);
+    border-radius: 35px;
+
+}
+
+.bookTrialLessonBtn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.55556;
+    color: #121417;
+    border-radius: 12px;
+    padding: 16px 48px;
+    background-color: #f4c550;
+    outline: none;
+    border: transparent;
+}
+
+.bookTrialLessonBtn:hover,
+.bookTrialLessonBtn:focus,
+.bookTrialLessonBtn:focus-visible {
+    background-color: #ffdc86;
+    outline: 1px solid #f4d401;
+}

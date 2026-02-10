@@ -19,3 +19,5 @@ interface Reviews {
     reviewer_name: string;
     reviewer_rating: number;
 }
+
+export type TeacherWithId = Teacher & { id: string }
