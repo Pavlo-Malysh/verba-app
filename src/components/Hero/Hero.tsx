@@ -3,12 +3,12 @@ import css from "./Hero.module.css";
 function Hero() {
 
     return (
-        <section>
+        <section className={css.heroSection}>
             <div className={css.heroBox}>
                 <div className={css.heroContent}>
                     <h1 className={css.title}>Unlock your potential with the best <span className={css.titleAccent}>language</span> tutors</h1>
                     <p className={css.text}>Embark on an Exciting Language Journey with Expert Language Tutors: Elevate your language proficiency to new heights by connecting with highly qualified and experienced tutors.</p>
-                    <a className={css.link} href="#">Get started</a>
+                    <a className={css.link} href="/teachers">Get started</a>
                 </div>
                 <div className={css.heroImgBox}>
                     <img className={css.heroImg} src="/hero.png" alt="" />

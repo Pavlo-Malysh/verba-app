@@ -1,7 +1,12 @@
+header {
+    background-color: #fff;
+}
+
 .headerContainer {
     max-width: 1440px;
     padding: 20px 64px;
     display: flex;
+    margin: 0 auto 20px;
 }
 
 .logoText {

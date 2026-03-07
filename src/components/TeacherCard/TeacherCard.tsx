@@ -8,13 +8,16 @@ type Props = {
     data: Teacher;
     isOpen: boolean;
     onToggle: (id: string) => void;
+    filterLevel: string | null;
 }
 
-export default function TeacherCard({ id, data, isOpen, onToggle }: Props) {
+export default function TeacherCard({ id, data, isOpen, onToggle, filterLevel }: Props) {
     const { avatar_url, conditions, languages, lesson_info, lessons_done, name, price_per_hour, rating, surname, experience, levels, reviews } = data
 
+
+
     const openReadMore = clsx(
-        css.testtext, isOpen && css.open
+        css.hiddenText, isOpen && css.open
     )
 
 
@@ -67,7 +70,6 @@ export default function TeacherCard({ id, data, isOpen, onToggle }: Props) {
 
                         return (
                             <li className={css.reviewsListItem} key={index}>
-                                {/* <img className={css.userAvatarReviews} src="/user-default.png" alt="default user avatar" width={44} height={44} /> */}
                                 <div className={css.reviewWrapper}>
                                     <svg className={css.userAvatarDefault} width={44} height={44}><use href="/icons.svg#icon-person" ></use></svg>
 
@@ -89,12 +91,15 @@ export default function TeacherCard({ id, data, isOpen, onToggle }: Props) {
                     }
                 </ul>
                 <ul className={css.listLevels}>
-                    {levels.map((level, index) => <li className={css.listLevelsItem} key={index}>#{level}</li>)}
+                    {levels.map((level, index) => <li className={css.listLevelsItem} style={level === filterLevel ? { backgroundColor: "#f4c550" } : undefined} key={index}>#{level}</li>)}
 
                 </ul>
                 <button className={css.bookTrialLessonBtn} type="button">Book trial lesson</button>
             </div>
+            {!isOpen && <ul className={`${css.listLevels}`}>
+                {levels.map((level, index) => <li className={css.listLevelsItem} style={level === filterLevel ? { backgroundColor: "#f4c550" } : undefined} key={index}>#{level}</li>)}
 
+            </ul>}
 
         </li >
     )

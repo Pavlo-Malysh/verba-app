@@ -123,7 +123,7 @@
     background-color: #38cd3e;
     border-radius: 50%;
     border: 2px solid #ffff;
-    z-index: 999;
+    z-index: 998;
 }
 
 .avatarContainer {
@@ -199,10 +199,11 @@
     color: #121417;
     border: none;
     background-color: transparent;
+    margin-bottom: 32px;
 }
 
 
-.testtext {
+.hiddenText {
     height: 0;
     overflow: hidden;
 }
@@ -278,7 +279,7 @@
 .listLevels {
     display: flex;
     gap: 8px;
-    margin-bottom: 32px;
+
 }
 
 .listLevelsItem {
@@ -304,6 +305,7 @@
     background-color: #f4c550;
     outline: none;
     border: transparent;
+    margin-top: 32px;
 }
 
 .bookTrialLessonBtn:hover,

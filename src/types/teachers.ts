@@ -20,4 +20,15 @@ interface Reviews {
     reviewer_rating: number;
 }
 
-export type TeacherWithId = Teacher & { id: string }
+export interface Filters {
+
+    language: string | null;
+    level: string | null;
+    price: number | null;
+
+}
+
+export interface LoginFormData {
+    email: string;
+    password: string
+}

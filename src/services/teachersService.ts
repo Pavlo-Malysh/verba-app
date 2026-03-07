@@ -2,7 +2,7 @@
 import {
     get, limitToFirst, orderByKey, query, ref, startAfter
 } from "firebase/database";
-import type { Teacher } from "../types/teachers"
+import type { Filters, Teacher } from "../types/teachers"
 import { db } from "../firebase/firebaseConfig";
 
 export type Response = {
@@ -11,13 +11,13 @@ export type Response = {
 }
 
 type data = {
-    id: Teacher
+    [id: string]: Teacher
 }
 
 const refDB = ref(db, "teachers/teachers");
 
 
-export default async function getTeachers(limit: number, lastItemId?: string | null): Promise<Response | undefined> {
+export default async function getTeachers(limit: number, lastItemId?: string | null, filters?: Filters | null): Promise<Response | undefined> {
 
     try {
         let recentTeachersRef;
@@ -38,20 +38,43 @@ export default async function getTeachers(limit: number, lastItemId?: string | n
             );
         }
 
-        const [snapshot, snapshotCounter] = await Promise.all([get(recentTeachersRef), get(ref(db, "teachers/totalCount"))])
+        if (filters && (filters.language || filters.level || filters.price)) {
+            console.log("FFFFFFFFF", filters);
+
+            const snapshot = await get(refDB);
+
+            const dataTeachers = Object.entries(snapshot.val() as data)
+
+            const dataFilters = dataTeachers.filter(([, teacher]) => {
+                if (filters.language && !teacher.languages.includes(filters.language)) return false;
+                if (filters.level && !teacher.levels.includes(filters.level)) return false;
+                if (filters.price && teacher.price_per_hour > Number(filters.price) || teacher.price_per_hour < (Number(filters.price) - 10)) return false;
+                return true;
+            })
+            console.log("test", dataFilters);
+
+            return {
+                teachers: Object.fromEntries(dataFilters),
+                totalCount: dataFilters.length
+
+            }
+        } else {
+
+            const [snapshot, snapshotCounter] = await Promise.all([
+                get(recentTeachersRef),
+                get(ref(db, "teachers/totalCount"))])
 
 
-        if (!snapshot.exists()) {
-            console.log("No data available");
-            return undefined
+            if (!snapshot.exists()) {
+                console.log("No data available");
+                return undefined
+            }
+
+            return {
+                teachers: snapshot.val(),
+                totalCount: snapshotCounter.val()
+            }
         }
-
-        return {
-            teachers: snapshot.val(),
-            totalCount: snapshotCounter.val()
-        }
-
-
 
 
     } catch (error) {

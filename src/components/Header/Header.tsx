@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import css from "./Header.module.css";
 
+interface Props {
+    openModal: () => void
+}
 
-function Header() {
+function Header({ openModal }: Props) {
 
     return (
         <header >
@@ -12,7 +15,7 @@ function Header() {
                     <Link to="/" className={css.navItem}>Home</Link>
                     <Link to="teachers" className={css.navItem}>Teachers</Link>
                 </nav>
-                <button type="button" className={css.loginBtn}><svg width={20} height={20}><use href="/icons.svg#icon-login" className={css.iconLogin}></use></svg>Log in</button>
+                <button type="button" onClick={() => openModal()} className={css.loginBtn}><svg width={20} height={20}><use href="/icons.svg#icon-login" className={css.iconLogin}></use></svg>Log in</button>
                 <button type="button" className={css.registerBtn}>Registration</button>
             </div>
         </header>

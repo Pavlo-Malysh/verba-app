@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import getTeachers from "../../services/teachersService"
 import TeacherList from "../../components/TeacherList/TeacherList";
-import type { Teacher } from "../../types/teachers";
+import type { Teacher, Filters } from "../../types/teachers";
 import css from "./TeachersPage.module.css"
+import SearchBox from "../../components/SearchBox/SearchBox";
+
+const languages = ["French", "English", 'German', 'Ukrainian', 'Polish', "Spanish", "Italian", "Korean", "Chinese", "Vietnamese"];
+const levels = ["A1 Beginner", "A2 Elementary", "B1 Intermediate", "B2 Upper-Intermediate", "C1 Advanced", "C2 Proficient"]
+const price_per_hour = [10, 20, 30, 40, 50]
+
 
 export type TeacherEntry = [string, Teacher];
 
@@ -10,59 +16,85 @@ export type TeacherEntry = [string, Teacher];
 
 export default function TeachersPage() {
     const [teachers, setTeachers] = useState<TeacherEntry[]>([]);
-    const [lastItemId, setlastItemId] = useState<string | null>(null)
-    const [hasMore, setHasMore] = useState<number>(0)
+    const [allFilteredTeachers, setAllFilteredTeachers] = useState<TeacherEntry[]>([]);
+    const [lastItemId, setlastItemId] = useState<string | null>(null);
+    const [hasMore, setHasMore] = useState<number>(0);
+    const [filters, setFilters] = useState<Filters | null>(null);
+    const [visibleCount, setVisibleCount] = useState(4);
+    const [filterLevel, setFilterLevel] = useState<string | null>(null);
 
     const limit = 4;
 
+    const hasActiveFilters = filters && (filters.language || filters.level || filters.price);
 
     useEffect(() => {
-        const data = async () => {
-            const data = await getTeachers(limit, lastItemId);
+        const fetchTeachers = async () => {
+            const data = await getTeachers(limit, null, filters);
 
             if (data) {
-                const teachersData = Object.entries(data.teachers)
-                setTeachers(teachersData);
+                const teachersData = Object.entries(data.teachers);
 
-                const lastKey = teachersData[teachersData.length - 1][0]
-                setlastItemId(lastKey);
+                if (hasActiveFilters) {
+                    // Зберігаємо ВСІ відфільтровані
+                    setAllFilteredTeachers(teachersData);
+                    // Показуємо перші 4
+                    setTeachers(teachersData.slice(0, limit));
+                    setVisibleCount(limit);
+                    setHasMore(teachersData.length - limit);
 
-                console.log("TEACHERS", teachersData);
-                console.log("LAST", lastKey);
-                const totalCount = data.totalCount;
-                const total = totalCount
-                setHasMore(total - limit)
-
-
-
+                    if (filters.level) {
+                        setFilterLevel(filters.level)
+                    }
+                } else {
+                    // Звичайна пагінація Firebase
+                    setTeachers(teachersData);
+                    const lastKey = teachersData[teachersData.length - 1][0];
+                    setlastItemId(lastKey);
+                    setHasMore(data.totalCount - limit);
+                }
             }
-        }
-        data();
-
-    }, [])
-
-    console.log("TOTALLLLLLLL", hasMore);
+        };
+        fetchTeachers();
+    }, [filters, hasActiveFilters]);
 
     const handleLoadMore = async () => {
-        const data = await getTeachers(limit, lastItemId);
-        if (data) {
-            const teachers = Object.entries(data.teachers)
-            setTeachers((prev) => [...prev, ...teachers]);
-
-            const keys = Object.keys(data.teachers)
-            setlastItemId(keys[keys.length - 1]);
-            setHasMore((prev) => prev - limit)
-
-
-
+        if (hasActiveFilters) {
+            // Пагінація на клієнті - показуємо наступні 4
+            const newVisibleCount = visibleCount + limit;
+            setTeachers(allFilteredTeachers.slice(0, newVisibleCount));
+            setVisibleCount(newVisibleCount);
+            setHasMore(allFilteredTeachers.length - newVisibleCount);
+        } else {
+            // Пагінація Firebase
+            const data = await getTeachers(limit, lastItemId, filters);
+            if (data) {
+                const newTeachers = Object.entries(data.teachers);
+                setTeachers((prev) => [...prev, ...newTeachers]);
+                const keys = Object.keys(data.teachers);
+                setlastItemId(keys[keys.length - 1]);
+                setHasMore((prev) => prev - limit);
+            }
         }
+    };
 
+    const handleFilter = (newFilters: Filters) => {
+        setFilters(newFilters);
+        setlastItemId(null);
     }
+
 
 
     return (
         <div className="container">
-            {teachers && <TeacherList teachers={teachers} />}
+            <SearchBox languages={languages} levels={levels} prices={
+                price_per_hour} onSubmit={handleFilter} />
+
+            {teachers.length > 0 && <TeacherList teachers={teachers} filterLevel={filterLevel} />}
+
+            {teachers.length === 0 && hasActiveFilters && (
+                <p className={css.emptyMessage}>No teachers found matching your filters</p>
+            )}
+
             {hasMore > 0 && <button onClick={handleLoadMore} className={css.btn} type="button">Load more</button>}
         </div>
     )

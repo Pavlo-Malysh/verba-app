@@ -6,11 +6,12 @@ import type { TeacherEntry } from "../../pages/TeachersPage/TeachersPage"
 
 type Props = {
     teachers: TeacherEntry[];
+    filterLevel: string | null
 }
 
 
 
-export default function TeacherList({ teachers }: Props) {
+export default function TeacherList({ teachers, filterLevel }: Props) {
     const [openId, setOpenId] = useState<string | null>(null)
 
     const handleToggle = (id: string) => {
@@ -30,6 +31,7 @@ export default function TeacherList({ teachers }: Props) {
                         id={id}
                         isOpen={openId === id}
                         onToggle={handleToggle}
+                        filterLevel={filterLevel}
                     />
                 ))
             })}
