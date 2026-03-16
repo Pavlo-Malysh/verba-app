@@ -32,3 +32,20 @@ export interface LoginFormData {
     email: string;
     password: string
 }
+
+export interface RegisterFormData {
+    name: string;
+    email: string;
+    password: string
+}
+
+export interface User {
+    email: string | null;
+    displayName: string | null;
+    uid: string;
+}
+
+export interface FirebaseAuthError {
+    code: string;
+    message: string;
+}

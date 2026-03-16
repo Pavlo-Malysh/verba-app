@@ -3,7 +3,7 @@ import css from './LoginModal.module.css'
 import { useForm } from 'react-hook-form'
 import * as yup from "yup"
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { LoginFormData } from '../../types/teachers';
 
 const schema = yup.object({
@@ -15,11 +15,14 @@ interface Props {
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (data: LoginFormData) => void;
+    errorMessages: string;
 }
 
-export default function LoginModal({ isOpen, onClose, onSubmit }: Props) {
+export default function LoginModal({ isOpen, onClose, onSubmit, errorMessages }: Props) {
+    const [showError, setShowError] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({
         defaultValues: {
             email: "",
             password: ""
@@ -34,6 +37,7 @@ export default function LoginModal({ isOpen, onClose, onSubmit }: Props) {
         const handleClickEscape = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
                 onClose();
+                reset()
             }
         }
         addEventListener("keydown", handleClickEscape)
@@ -45,6 +49,7 @@ export default function LoginModal({ isOpen, onClose, onSubmit }: Props) {
     const handleBackDrop = (e: React.MouseEvent<HTMLElement>) => {
         if (e.target === e.currentTarget) {
             onClose()
+            reset()
         }
     }
 
@@ -53,6 +58,30 @@ export default function LoginModal({ isOpen, onClose, onSubmit }: Props) {
         reset()
     }
 
+    const password = watch("password")
+
+    useEffect(() => {
+
+        if (errorMessages) {
+            setShowError(true);
+        }
+        if (!isOpen) {
+            reset();
+            setShowError(true);
+        }
+    }, [errorMessages, isOpen, reset])
+
+
+    useEffect(() => {
+        if (password) {
+            setShowError(false)
+        };
+
+    }, [password])
+
+    const toggleShowPassword = () => {
+        setShowPassword((prev) => !prev);
+    }
 
     return (
         <div className={openModal} onClick={handleBackDrop}>
@@ -62,11 +91,31 @@ export default function LoginModal({ isOpen, onClose, onSubmit }: Props) {
                 <p className={css.text}>Welcome back! Please enter your credentials to access your account and continue your search for an teacher.</p>
 
                 <form className={css.form} onSubmit={handleSubmit(handlerSubmit)}>
-                    <input className={css.input} {...register('email')} />
-                    {errors.email && <p className={css.errorMessages}>{errors.email.message}</p>}
+                    <div className={css.inputWrapper}>
+                        <input
+                            className={`${css.input} ${errors.email ? css.inputError : ""}`}
+                            type="email"
+                            placeholder="Email"
+                            {...register('email')}
+                        />
+                        {errors.email && <p className={css.errorMessages}>{errors.email.message}</p>}
+                    </div>
 
-                    <input className={`${css.input} ${css.lastInput}`} {...register('password')} />
-                    {errors.password && <p className={css.errorMessages}>{errors.password.message}</p>}
+                    <div className={css.inputWrapper}>
+                        <div className={css.passwordWrapper}>
+                            <input
+                                className={`${css.input} ${errors.password ? css.inputError : ""}`}
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                {...register('password')}
+                            />
+                            <span onClick={toggleShowPassword} className={css.iconEyesBlock}><svg className={css.iconEyes} width={20} height={20}><use href={showPassword ? '/icons.svg#icon-eye' : '/icons.svg#icon-eye-blocked'}></use></svg></span>
+                        </div>
+
+                        {errors.password && <p className={css.errorMessages}>{errors.password.message}</p>}
+                        {errorMessages && showError && <p className={css.errorMessages}>{errorMessages}</p>}
+                    </div>
+
                     <input className={css.submit} type="submit" value={"Log In"} />
                 </form>
             </div>

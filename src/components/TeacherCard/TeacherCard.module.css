@@ -100,10 +100,16 @@
     position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
 }
 
 .iconHeart:hover,
 .iconHeart:focus {
+    fill: #f4c550;
+    stroke: none;
+}
+
+.active {
     fill: #f4c550;
     stroke: none;
 }

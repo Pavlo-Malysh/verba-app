@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import getTeachers from "../../services/teachersService"
+import { useOutletContext } from "react-router-dom";
+import { getTeachers } from "../../services/teachersService"
 import TeacherList from "../../components/TeacherList/TeacherList";
 import type { Teacher, Filters } from "../../types/teachers";
 import css from "./TeachersPage.module.css"
@@ -9,12 +10,15 @@ const languages = ["French", "English", 'German', 'Ukrainian', 'Polish', "Spanis
 const levels = ["A1 Beginner", "A2 Elementary", "B1 Intermediate", "B2 Upper-Intermediate", "C1 Advanced", "C2 Proficient"]
 const price_per_hour = [10, 20, 30, 40, 50]
 
-
 export type TeacherEntry = [string, Teacher];
 
-
+interface OutletContextType {
+    favorites: string[];
+    onToggleFavorite: (teacherId: string) => void;
+}
 
 export default function TeachersPage() {
+    const { favorites, onToggleFavorite } = useOutletContext<OutletContextType>();
     const [teachers, setTeachers] = useState<TeacherEntry[]>([]);
     const [allFilteredTeachers, setAllFilteredTeachers] = useState<TeacherEntry[]>([]);
     const [lastItemId, setlastItemId] = useState<string | null>(null);
@@ -89,7 +93,7 @@ export default function TeachersPage() {
             <SearchBox languages={languages} levels={levels} prices={
                 price_per_hour} onSubmit={handleFilter} />
 
-            {teachers.length > 0 && <TeacherList teachers={teachers} filterLevel={filterLevel} />}
+            {teachers.length > 0 && <TeacherList teachers={teachers} filterLevel={filterLevel} favorites={favorites} onToggleFavorite={onToggleFavorite} />}
 
             {teachers.length === 0 && hasActiveFilters && (
                 <p className={css.emptyMessage}>No teachers found matching your filters</p>

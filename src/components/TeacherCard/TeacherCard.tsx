@@ -8,19 +8,23 @@ type Props = {
     data: Teacher;
     isOpen: boolean;
     onToggle: (id: string) => void;
-    filterLevel: string | null;
+    filterLevel?: string | null;
+    isFavorite: boolean;
+    onToggleFavorite: (teacherId: string) => void;
 }
 
-export default function TeacherCard({ id, data, isOpen, onToggle, filterLevel }: Props) {
+export default function TeacherCard({ id, data, isOpen, onToggle, filterLevel, isFavorite, onToggleFavorite }: Props) {
     const { avatar_url, conditions, languages, lesson_info, lessons_done, name, price_per_hour, rating, surname, experience, levels, reviews } = data
 
-
+    const heartClass = clsx(css.iconHeart, isFavorite && css.active)
 
     const openReadMore = clsx(
         css.hiddenText, isOpen && css.open
     )
 
-
+    const handleToggleFavorite = () => {
+        onToggleFavorite(id);
+    }
 
 
     return (
@@ -44,7 +48,8 @@ export default function TeacherCard({ id, data, isOpen, onToggle, filterLevel }:
                         <li className={`${css.navListItem} ${css.listItemText}`}>Price / 1 hour: <span className={css.price}>{price_per_hour}$</span></li>
 
                     </ul>
-                    <svg className={css.iconHeart} width={20} height={20}><use href="/icons.svg#icon-heart" ></use></svg>
+                    <button onClick={handleToggleFavorite} type="button"> <svg className={heartClass} width={20} height={20}><use href="/icons.svg#icon-heart" ></use></svg></button>
+
 
                 </div>
                 <div>
