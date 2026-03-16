@@ -49,10 +49,10 @@ export default function BookTrialLessonModal({ isOpen, onClose }: Props) {
         }
     }
 
-    const handlerSubmit = (data) => {
-        // onSubmit(data)
+    // const handlerSubmit = (data) => {
+    //     // onSubmit(data)
 
-    }
+    // }
 
 
     return (
@@ -62,7 +62,7 @@ export default function BookTrialLessonModal({ isOpen, onClose }: Props) {
                 <h2 className={css.title}>Book trial lesson</h2>
                 <p className={css.text}>Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs.</p>
 
-                <form className={css.form} onSubmit={handleSubmit(handlerSubmit)}>
+                <form className={css.form} >
                     <div className={css.inputWrapper}>
                         <input
                             className={`${css.input} ${errors.name ? css.inputError : ""}`}
