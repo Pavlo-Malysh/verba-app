@@ -105,7 +105,7 @@ function Layout() {
             <Header openModalLogin={() => setOpenModalLogin(!false)} openModalRegister={() => setOpenModalRegister(!false)} isLoggedIn={isLoggedIn} onLogout={onLogout} user={user} />
             <LoginModal isOpen={openModalLogin} onClose={handleCloseLogin} onSubmit={onSubmitLogin} errorMessages={errorMessages} />
             <RegisterModal isOpen={openModalRegister} onClose={handleCloseRegister} onSubmit={onSubmitRegister} errorMessages={errorMessages} />
-            {/* <BookTrialLessonModal/> */}
+
             <Outlet context={{ favorites, onToggleFavorite: handleToggleFavorite, user }} />
 
         </>
