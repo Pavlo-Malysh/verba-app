@@ -6,7 +6,7 @@ import type { FirebaseAuthError, LoginFormData, RegisterFormData, User } from ".
 import RegisterModal from "../components/RegisterModal/RegisterModal.tsx";
 import { auth, createUser, getFavorites, LoginEmailPassword, logout, toggleFavorite } from "../services/teachersService.ts";
 import { onAuthStateChanged } from "firebase/auth";
-import BookTrialLessonModal from "../components/BookTrialLessonModal/BookTrialLessonModule.tsx";
+
 
 
 function Layout() {
