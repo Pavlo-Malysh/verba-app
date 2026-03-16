@@ -48,7 +48,7 @@ export default function TeacherCard({ id, data, isOpen, onToggle, filterLevel, i
                         <li className={`${css.navListItem} ${css.listItemText}`}>Price / 1 hour: <span className={css.price}>{price_per_hour}$</span></li>
 
                     </ul>
-                    <button onClick={handleToggleFavorite} type="button"> <svg className={heartClass} width={20} height={20}><use href="/icons.svg#icon-heart" ></use></svg></button>
+                    <button onClick={handleToggleFavorite} className={css.heartBtn} type="button"> <svg className={heartClass} width={20} height={20}><use href="/icons.svg#icon-heart" ></use></svg></button>
 
 
                 </div>

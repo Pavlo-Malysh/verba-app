@@ -114,6 +114,11 @@
     stroke: none;
 }
 
+.heartBtn {
+    border: none;
+    background-color: transparent;
+}
+
 .avatar {
 
     border-radius: 50%;
