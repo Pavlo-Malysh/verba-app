@@ -143,16 +143,17 @@ function Layout() {
     };
 
     return (
-        < >
+        <div className="page-wrapper">
             <Header openModalLogin={() => setOpenModalLogin(!false)} openModalRegister={() => setOpenModalRegister(!false)} isLoggedIn={isLoggedIn} onLogout={onLogout} user={user} />
             <LoginModal isOpen={openModalLogin} onClose={handleCloseLogin} onSubmit={onSubmitLogin} errorMessages={errorMessages} />
             <RegisterModal isOpen={openModalRegister} onClose={handleCloseRegister} onSubmit={onSubmitRegister} errorMessages={errorMessages} />
 
-
-            <Outlet context={{ favorites, onToggleFavorite: handleToggleFavorite, user, onBookingModal: handleOpenBookingModal }} />
+            <main className="page-main">
+                <Outlet context={{ favorites, onToggleFavorite: handleToggleFavorite, user, onBookingModal: handleOpenBookingModal }} />
+            </main>
             <Footer />
             <BookingModal isOpen={openBookingModal} onClose={handleCloseBookingModal} currentTeacher={currentTeacherBookingModal} onSubmit={onSubmitBookingForm} />
-        </>
+        </div>
     )
 }
 
