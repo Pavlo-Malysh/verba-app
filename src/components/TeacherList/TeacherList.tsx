@@ -9,6 +9,7 @@ type Props = {
     filterLevel?: string | null;
     favorites: string[];
     onToggleFavorite: (teacherId: string) => void;
+
 }
 
 export default function TeacherList({ teachers, filterLevel, favorites, onToggleFavorite }: Props) {
@@ -34,6 +35,7 @@ export default function TeacherList({ teachers, filterLevel, favorites, onToggle
                         filterLevel={filterLevel}
                         isFavorite={favorites.includes(id)}
                         onToggleFavorite={onToggleFavorite}
+
                     />
                 ))
             })}

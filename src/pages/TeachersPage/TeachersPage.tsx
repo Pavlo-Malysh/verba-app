@@ -15,7 +15,9 @@ export type TeacherEntry = [string, Teacher];
 interface OutletContextType {
     favorites: string[];
     onToggleFavorite: (teacherId: string) => void;
+
 }
+
 
 export default function TeachersPage() {
     const { favorites, onToggleFavorite } = useOutletContext<OutletContextType>();
@@ -52,6 +54,8 @@ export default function TeachersPage() {
                 } else {
                     // Звичайна пагінація Firebase
                     setTeachers(teachersData);
+                    console.log(teachersData);
+
                     const lastKey = teachersData[teachersData.length - 1][0];
                     setlastItemId(lastKey);
                     setHasMore(data.totalCount - limit);

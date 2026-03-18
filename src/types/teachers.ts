@@ -49,3 +49,24 @@ export interface FirebaseAuthError {
     code: string;
     message: string;
 }
+
+export interface TeacherInfoBookModal {
+    avatar_url: string;
+    name: string;
+    surname: string;
+    id: string;
+}
+
+export interface FormDataBook {
+
+    email: string;
+    name: string;
+    phone: string;
+    reasonLearnEnglish: string;
+}
+
+export interface SaveFormData extends FormDataBook {
+    teacherId: string;
+
+
+}

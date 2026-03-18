@@ -2,20 +2,25 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header.tsx"
 import LoginModal from "../components/LoginModal/LoginModal.tsx";
 import { useEffect, useState } from "react";
-import type { FirebaseAuthError, LoginFormData, RegisterFormData, User } from "../types/teachers.ts";
+import type { FirebaseAuthError, LoginFormData, RegisterFormData, SaveFormData, TeacherInfoBookModal, User } from "../types/teachers.ts";
 import RegisterModal from "../components/RegisterModal/RegisterModal.tsx";
-import { auth, createUser, getFavorites, LoginEmailPassword, logout, toggleFavorite } from "../services/teachersService.ts";
+import { auth, createUser, getFavorites, LoginEmailPassword, logout, saveFormData, toggleFavorite } from "../services/teachersService.ts";
 import { onAuthStateChanged } from "firebase/auth";
+import BookingModal from "../components/BookingModal/BookingModal.tsx";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 
 
 function Layout() {
     const [openModalLogin, setOpenModalLogin] = useState(false);
     const [openModalRegister, setOpenModalRegister] = useState(false);
+    const [openBookingModal, setOpenBookingModal] = useState(false);
     const [errorMessages, setErrorMessages] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState<null | User>(null);
     const [favorites, setFavorites] = useState<string[]>([]);
+    const [currentTeacherBookingModal, setTeacherBookingModal] = useState<null | TeacherInfoBookModal>(null);
 
     const onSubmitLogin = async (data: LoginFormData) => {
         try {
@@ -100,14 +105,51 @@ function Layout() {
     }, [])
 
 
+    const handleCloseBookingModal = () => {
+        setOpenBookingModal(false);
+
+    }
+
+    const handleOpenBookingModal = (data: TeacherInfoBookModal) => {
+        setOpenBookingModal(true);
+        setTeacherBookingModal(data)
+
+    }
+
+    const onSubmitBookingForm = async (data: SaveFormData) => {
+        try {
+            console.log(data);
+            await saveFormData(data);
+            setOpenBookingModal(false);
+
+            iziToast.success({
+                title: 'Success',
+                message: 'Thank you! We will contact you shortly.',
+                position: "topCenter"
+            });
+
+
+        } catch (error) {
+            console.log(error);
+            iziToast.error({
+                title: 'Error',
+                message: 'Sorry, there was an error submitting the form. Please try again later.',
+                position: "topCenter"
+            });
+
+
+        }
+    };
+
     return (
         < >
             <Header openModalLogin={() => setOpenModalLogin(!false)} openModalRegister={() => setOpenModalRegister(!false)} isLoggedIn={isLoggedIn} onLogout={onLogout} user={user} />
             <LoginModal isOpen={openModalLogin} onClose={handleCloseLogin} onSubmit={onSubmitLogin} errorMessages={errorMessages} />
             <RegisterModal isOpen={openModalRegister} onClose={handleCloseRegister} onSubmit={onSubmitRegister} errorMessages={errorMessages} />
 
-            <Outlet context={{ favorites, onToggleFavorite: handleToggleFavorite, user }} />
 
+            <Outlet context={{ favorites, onToggleFavorite: handleToggleFavorite, user, onBookingModal: handleOpenBookingModal }} />
+            <BookingModal isOpen={openBookingModal} onClose={handleCloseBookingModal} currentTeacher={currentTeacherBookingModal} onSubmit={onSubmitBookingForm} />
         </>
     )
 }

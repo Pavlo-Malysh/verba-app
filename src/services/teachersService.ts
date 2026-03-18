@@ -1,8 +1,8 @@
 
 import {
-    get, limitToFirst, orderByKey, query, ref, remove, set, startAfter
+    get, limitToFirst, orderByKey, push, query, ref, remove, set, startAfter
 } from "firebase/database";
-import type { Filters, LoginFormData, RegisterFormData, Teacher } from "../types/teachers"
+import type { Filters, LoginFormData, RegisterFormData, SaveFormData, Teacher } from "../types/teachers"
 import { app, db } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
@@ -177,4 +177,9 @@ export async function getFavoritesTeachers(favorites: string[]): Promise<[string
     const teachers = Object.entries(snapshot.val() as data);
 
     return teachers.filter(([id]) => favorites.includes(id));
+}
+
+export async function saveFormData(data: SaveFormData) {
+    const formDataRef = ref(db, `formBookData`);
+    await push(formDataRef, data);
 }
