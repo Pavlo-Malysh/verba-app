@@ -54,7 +54,6 @@ export default function TeachersPage() {
                 } else {
                     // Звичайна пагінація Firebase
                     setTeachers(teachersData);
-                    console.log(teachersData);
 
                     const lastKey = teachersData[teachersData.length - 1][0];
                     setlastItemId(lastKey);

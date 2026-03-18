@@ -38,6 +38,12 @@ export default function BookingModal({ isOpen, onClose, currentTeacher, onSubmit
     )
 
     useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
         const handleClickEscape = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
                 onClose();
@@ -46,7 +52,10 @@ export default function BookingModal({ isOpen, onClose, currentTeacher, onSubmit
         }
         addEventListener("keydown", handleClickEscape)
 
-        return (() => removeEventListener("keydown", handleClickEscape))
+        return () => {
+            removeEventListener("keydown", handleClickEscape)
+            document.body.style.overflow = "";
+        }
 
     }, [isOpen, onClose])
 
@@ -72,7 +81,7 @@ export default function BookingModal({ isOpen, onClose, currentTeacher, onSubmit
                 <h2 className={css.title}>Book trial lesson</h2>
                 <p className={css.text}>Our experienced tutor will assess your current language level, discuss your learning goals, and tailor the lesson to your specific needs.</p>
                 <div className={css.teacherInfoBox}>
-                    <img className={css.teacherInfoImg} src={currentTeacher?.avatar_url ? currentTeacher.avatar_url : ""} alt={`avatar ${currentTeacher?.name} ${currentTeacher?.surname}`} />
+                    {currentTeacher?.avatar_url && <img className={css.teacherInfoImg} src={currentTeacher.avatar_url} alt={`avatar ${currentTeacher.name} ${currentTeacher.surname}`} />}
                     <div>
                         <p className={css.teacherInfoText}>Your teacher</p>
                         <h4 className={css.teacherInfoTitle}>{currentTeacher?.name} {currentTeacher?.surname}</h4>

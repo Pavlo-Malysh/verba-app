@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import BookingModal from "../components/BookingModal/BookingModal.tsx";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import Footer from "../components/Footer/Footer.tsx";
 
 
 
@@ -149,6 +150,7 @@ function Layout() {
 
 
             <Outlet context={{ favorites, onToggleFavorite: handleToggleFavorite, user, onBookingModal: handleOpenBookingModal }} />
+            <Footer />
             <BookingModal isOpen={openBookingModal} onClose={handleCloseBookingModal} currentTeacher={currentTeacherBookingModal} onSubmit={onSubmitBookingForm} />
         </>
     )
