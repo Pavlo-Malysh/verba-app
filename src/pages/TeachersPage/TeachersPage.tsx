@@ -92,18 +92,22 @@ export default function TeachersPage() {
 
 
     return (
-        <div className="container">
-            <SearchBox languages={languages} levels={levels} prices={
-                price_per_hour} onSubmit={handleFilter} />
+        <section className={css.teacherPage}>
+            <div className="container">
+                <SearchBox languages={languages} levels={levels} prices={
+                    price_per_hour} onSubmit={handleFilter} />
 
-            {teachers.length > 0 && <TeacherList teachers={teachers} filterLevel={filterLevel} favorites={favorites} onToggleFavorite={onToggleFavorite} />}
+                {teachers.length > 0 && <TeacherList teachers={teachers} filterLevel={filterLevel} favorites={favorites} onToggleFavorite={onToggleFavorite} />}
 
-            {teachers.length === 0 && hasActiveFilters && (
-                <p className={css.emptyMessage}>No teachers found matching your filters</p>
-            )}
+                {teachers.length === 0 && hasActiveFilters && (
+                    <p className={css.emptyMessage}>No teachers found matching your filters</p>
+                )}
 
-            {hasMore > 0 && <button onClick={handleLoadMore} className={css.btn} type="button">Load more</button>}
-        </div>
+                {hasMore > 0 && <button onClick={handleLoadMore} className={css.btn} type="button">Load more</button>}
+            </div>
+
+        </section>
+
     )
 }
 
